@@ -45,13 +45,6 @@ endif
 
 PRODUCT_SHIPPING_API_LEVEL := 31
 
-# Set custom settings
-DEVICE_PACKAGE_OVERLAYS := device/linaro/hikey/overlay
-ifneq (,$(filter $(DEVICE_TYPE),tv))
-# Set TV Custom Settings
-DEVICE_PACKAGE_OVERLAYS += device/google/atv/overlay
-endif
-
 # Add wifi-related packages
 PRODUCT_PACKAGES += libwpa_client wpa_supplicant hostapd wificond
 PRODUCT_PROPERTY_OVERRIDES += wifi.interface=wlan0 \
@@ -309,6 +302,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PACKAGES += \
     Jelly \
+
+################################################################################
 
 PRODUCT_PACKAGES += \
     glodroid_overlay_frameworks_base_core \
