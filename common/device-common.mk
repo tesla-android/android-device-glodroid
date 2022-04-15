@@ -335,3 +335,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PACKAGES += \
     Jelly \
+
+PRODUCT_PACKAGES += \
+    glodroid_overlay_frameworks_base_core \
+    glodroid_overlay_settings_provider \
+    glodroid_overlay_systemui \
+
+PRODUCT_SOONG_NAMESPACES += device/glodroid
