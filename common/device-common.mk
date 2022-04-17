@@ -318,3 +318,16 @@ PRODUCT_PROPERTY_OVERRIDES += \
     config.override_forced_orient=false \
     ro.sf.hwrotation=0 \
     persist.demo.hdmirotation=landscape \
+    
+################################################################################
+
+# Google Apps   
+$(call inherit-product, vendor/opengapps/build/opengapps-packages.mk)
+
+GAPPS_VARIANT := nano
+
+GAPPS_FORCE_PACKAGE_OVERRIDES := true
+
+PRODUCT_BROKEN_VERIFY_USES_LIBRARIES := true
+
+    
