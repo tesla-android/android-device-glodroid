@@ -158,7 +158,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 ##
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sf.lcd_density=160 \
+    ro.sf.lcd_density=240 \
 
 # Gatekeeper HAL
 PRODUCT_PACKAGES += \
@@ -196,7 +196,7 @@ else
 
 # Use Launcher3QuickStep
 PRODUCT_PACKAGES += Launcher3QuickStep
-PRODUCT_PROPERTY_OVERRIDES += ro.sf.lcd_density=160
+PRODUCT_PROPERTY_OVERRIDES += ro.sf.lcd_density=240
 endif
 
 #External USB Camera HAL
@@ -331,3 +331,6 @@ PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS := false
 
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 PRODUCT_BUILD_SUPER_PARTITION := true
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/virtual_touchscreen_websocket_relay:$(TARGET_COPY_OUT_VENDOR)/bin/virtual_touchscreen_websocket_relay \
