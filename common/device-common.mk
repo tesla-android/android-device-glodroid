@@ -262,40 +262,15 @@ PRODUCT_COPY_FILES += \
     device/glodroid/common/init.common.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.common.rc \
 
 
-################# GLODROID ADDITIONAL PACKAGES SECTION #########################
+################# ADDITIONAL PACKAGES SECTION #########################
 
 PRODUCT_COPY_FILES += \
     device/glodroid/common/preinstall.sh:$(TARGET_COPY_OUT_VENDOR)/etc/preinstall/preinstall.sh \
-    prebuilts/applications/fdroid.apk:$(TARGET_COPY_OUT_VENDOR)/etc/preinstall/fdroid.apk_ \
-    prebuilts/applications/shade-launcher3.apk:$(TARGET_COPY_OUT_VENDOR)/etc/preinstall/shade-launcher3.apk_ \
-    prebuilts/applications/skytube.apk:$(TARGET_COPY_OUT_VENDOR)/etc/preinstall/skytube.apk_ \
+    device/glodroid/common/applications/AutoKit.apk:$(TARGET_COPY_OUT_VENDOR)/etc/preinstall/AutoKit.apk_ \
 
-ifeq ($(TARGET_ARCH),arm)
-PRODUCT_COPY_FILES += prebuilts/applications/fenix-arm.apk:$(TARGET_COPY_OUT_VENDOR)/etc/preinstall/fenix.apk_
-else
-PRODUCT_COPY_FILES += prebuilts/applications/fenix-arm64.apk:$(TARGET_COPY_OUT_VENDOR)/etc/preinstall/fenix.apk_
-endif
-
-# Prebuild .apk applications for non-lowram devices
-ifeq (,$(filter $(GLODROID_LOWRAM),true))
 PRODUCT_PACKAGES += \
-    FDroid \
-    SkyTube \
-    fenix \
-
-endif
-
-# Prebuild .apk applications for Android TV
-ifneq (,$(filter $(DEVICE_TYPE),tv))
-PRODUCT_PACKAGES += \
-    Kodi \
-
-else
-PRODUCT_PACKAGES += \
-    shade-launcher3 \
-
-endif
-
+    AutoKit \
+    
 ################################################################################
 
 PRODUCT_PACKAGES += fstab
