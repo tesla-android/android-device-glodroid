@@ -270,7 +270,7 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PACKAGES += \
     AutoKit \
-    
+
 ################################################################################
 
 PRODUCT_PACKAGES += fstab
@@ -309,8 +309,7 @@ PRODUCT_BUILD_SUPER_PARTITION := true
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/virtual_touchscreen_websocket_relay:$(TARGET_COPY_OUT_VENDOR)/bin/virtual_touchscreen_websocket_relay \
-    
-    
+
 ################################################################################
 
 # Screen orientation lock
@@ -318,10 +317,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     config.override_forced_orient=false \
     ro.sf.hwrotation=0 \
     persist.demo.hdmirotation=landscape \
-    
+
 ################################################################################
 
-# Google Apps   
+# Google Apps
 $(call inherit-product, vendor/opengapps/build/opengapps-packages.mk)
 
 GAPPS_VARIANT := nano
@@ -330,4 +329,9 @@ GAPPS_FORCE_PACKAGE_OVERRIDES := true
 
 PRODUCT_BROKEN_VERIFY_USES_LIBRARIES := true
 
-    
+################################################################################
+
+# LineageOS browser
+
+PRODUCT_PACKAGES += \
+    Jelly \
