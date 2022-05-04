@@ -1,4 +1,4 @@
-# glodroid_device
-GloDroid project devices configuration
+# android-device-glodroid
+Device tree for AOSP with Tesla Android changes.
 
-Find more information at https://github.com/glodroid/glodroid_manifest
+Based on https://github.com/glodroid/glodroid_device
