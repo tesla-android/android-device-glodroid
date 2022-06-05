@@ -1,6 +1,6 @@
 GENSDIMG := $(PLATFORM_PATH)/tools/gensdimg.sh
 
-NATIVE_PATH := PATH=/sbin:/bin:/usr/bin:$$PATH
+NATIVE_PATH := PATH=/sbin:/bin:/usr/bin:/usr/local/bin:$$PATH
 
 DEPLOY_TOOLS := \
 	$(HOST_OUT_EXECUTABLES)/adb \

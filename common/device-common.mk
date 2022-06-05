@@ -174,8 +174,8 @@ PRODUCT_PACKAGES += \
 
 # Health HAL
 PRODUCT_PACKAGES += \
-    android.hardware.health-service.example \
-    android.hardware.health-service.example_recovery \
+    android.hardware.health@2.1-service \
+    android.hardware.health@2.1-impl \
 
 ifneq (,$(filter $(DEVICE_TYPE),tv))
 # TV Specific Packages
@@ -200,25 +200,25 @@ PRODUCT_PROPERTY_OVERRIDES += ro.sf.lcd_density=240
 endif
 
 #External USB Camera HAL
-PRODUCT_PACKAGES += \
-    android.hardware.camera.provider@2.5-external-service \
+# PRODUCT_PACKAGES += \
+#     android.hardware.camera.provider@2.5-external-service \
+# 
+# PRODUCT_COPY_FILES += \
+#     device/glodroid/common/external_camera_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/external_camera_config.xml
+# 
+# #Camera HAL
+# PRODUCT_PACKAGES += \
+#     camera.libcamera \
+#     android.hardware.camera.provider@2.5-service_64 \
+# 
+# PRODUCT_PROPERTY_OVERRIDES += ro.hardware.camera=libcamera
 
-PRODUCT_COPY_FILES += \
-    device/glodroid/common/external_camera_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/external_camera_config.xml
-
-#Camera HAL
-PRODUCT_PACKAGES += \
-    camera.libcamera \
-    android.hardware.camera.provider@2.5-service_64 \
-
-PRODUCT_PROPERTY_OVERRIDES += ro.hardware.camera=libcamera
-
-PRODUCT_COPY_FILES +=  \
-    frameworks/native/data/etc/android.hardware.camera.concurrent.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.concurrent.xml \
-    frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.flash-autofocus.xml \
-    frameworks/native/data/etc/android.hardware.camera.front.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.front.xml \
-    frameworks/native/data/etc/android.hardware.camera.full.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.full.xml \
-    frameworks/native/data/etc/android.hardware.camera.raw.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.raw.xml \
+# PRODUCT_COPY_FILES +=  \
+#     frameworks/native/data/etc/android.hardware.camera.concurrent.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.concurrent.xml \
+#     frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.flash-autofocus.xml \
+#     frameworks/native/data/etc/android.hardware.camera.front.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.front.xml \
+#     frameworks/native/data/etc/android.hardware.camera.full.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.full.xml \
+#     frameworks/native/data/etc/android.hardware.camera.raw.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.raw.xml \
 
 # Copy hardware config file(s)
 PRODUCT_COPY_FILES +=  \
@@ -321,13 +321,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 ################################################################################
 
 # Google Apps
-$(call inherit-product, vendor/opengapps/build/opengapps-packages.mk)
-
-GAPPS_VARIANT := nano
-
-GAPPS_FORCE_PACKAGE_OVERRIDES := true
-
-PRODUCT_BROKEN_VERIFY_USES_LIBRARIES := true
+# $(call inherit-product, vendor/opengapps/build/opengapps-packages.mk)
+# 
+# GAPPS_VARIANT := nano
+# 
+# GAPPS_FORCE_PACKAGE_OVERRIDES := true
+# 
+# PRODUCT_BROKEN_VERIFY_USES_LIBRARIES := true
 
 ################################################################################
 
