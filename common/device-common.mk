@@ -141,7 +141,7 @@ PRODUCT_PACKAGES += \
 
 # PowerHAL
 PRODUCT_PACKAGES += \
-    android.hardware.power-service.glodroid \
+    android.hardware.power-service.example \
 
 # Health HAL
 PRODUCT_PACKAGES += \
