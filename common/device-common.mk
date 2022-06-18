@@ -304,6 +304,25 @@ PRODUCT_PACKAGES += \
 
 ################################################################################
 
+# usb_modeswitch
+
+PRODUCT_PACKAGES += \
+    usb_modeswitch \
+    
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/usb_modeswitch.conf:$(TARGET_COPY_OUT_VENDOR)/etc/usb_modeswitch.conf \
+    
+################################################################################
+
+# v4l2
+
+PRODUCT_PACKAGES += \
+    v4l2-dbg \
+    v4l2-compliance \
+    v4l2-ctl \
+        
+################################################################################
+    
 PRODUCT_PACKAGES += \
     glodroid_overlay_frameworks_base_core \
     glodroid_overlay_settings_provider \
