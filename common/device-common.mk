@@ -275,10 +275,14 @@ PRODUCT_COPY_FILES += \
 ################################################################################
 
 # Screen orientation lock
+PRODUCT_COPY_FILES += frameworks/native/data/etc/android.hardware.screen.landscape.xml:system/etc/permissions/android.hardware.screen.landscape.xml \
+
 PRODUCT_PROPERTY_OVERRIDES += \
     config.override_forced_orient=false \
     ro.sf.hwrotation=0 \
     persist.demo.hdmirotation=landscape \
+    persist.demo.rotationlock=true \
+    persist.demo.remoterotation=landscape \
 
 ################################################################################
 
