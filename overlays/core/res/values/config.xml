@@ -28,16 +28,6 @@
          autodetected from the Configuration. -->
     <bool name="config_showNavigationBar">true</bool>
     
-    
-    <!-- If true, enables auto-rotation features using the accelerometer.
-         Otherwise, auto-rotation is disabled.  Applications may still request
-         to use specific orientations but the sensor is ignored and sensor-based
-         orientations are not available.  Furthermore, all auto-rotation related
-         settings are omitted from the system UI.  In certain situations we may
-         still use the accelerometer to determine the orientation, such as when
-         docked if the dock is configured to enable the accelerometer. -->
-    <bool name="config_supportAutoRotation">false</bool>
-
     <!-- User activity timeout: Maximum screen dim duration as a percentage of screen off timeout.
 
          This resource is similar to config_maximumScreenDimDuration but the maximum
@@ -53,4 +43,8 @@
          dim before the device goes to sleep.
     -->
     <fraction name="config_maximumScreenDimRatio">40%</fraction>
+    
+    <bool name="config_forceDefaultOrientation">true</bool>
+    <bool name="config_supportAutoRotation">false</bool>
+    <bool name="config_deskDockEnablesAccelerometer">false</bool>
 </resources>
