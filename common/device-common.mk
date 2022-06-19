@@ -188,7 +188,6 @@ endif
 
 # Copy hardware config file(s)
 PRODUCT_COPY_FILES +=  \
-        device/linaro/hikey/etc/permissions/android.hardware.screen.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.screen.xml \
         device/linaro/hikey/etc/permissions/android.software.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.xml \
         frameworks/native/data/etc/android.software.cts.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.cts.xml \
         frameworks/native/data/etc/android.software.app_widgets.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.app_widgets.xml \
@@ -275,7 +274,7 @@ PRODUCT_COPY_FILES += \
 ################################################################################
 
 # Screen orientation lock
-PRODUCT_COPY_FILES += frameworks/native/data/etc/android.hardware.screen.landscape.xml:system/etc/permissions/android.hardware.screen.landscape.xml \
+PRODUCT_COPY_FILES += frameworks/native/data/etc/android.hardware.screen.landscape.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.screen.landscape.xml \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     config.override_forced_orient=false \
