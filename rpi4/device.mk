@@ -4,6 +4,7 @@
 
 $(call inherit-product, device/glodroid/common/device-common.mk)
 $(call inherit-product, device/glodroid/common/bluetooth/bluetooth.mk)
+$(call inherit-product, vendor/brcm/rpi4/rpi4-vendor.mk)
 
 # Firmware
 PRODUCT_COPY_FILES += \

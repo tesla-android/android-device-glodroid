@@ -285,14 +285,16 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 ################################################################################
 
-# Google Apps
-# $(call inherit-product, vendor/opengapps/build/opengapps-packages.mk)
-# 
-# GAPPS_VARIANT := nano
-# 
-# GAPPS_FORCE_PACKAGE_OVERRIDES := true
-# 
-# PRODUCT_BROKEN_VERIFY_USES_LIBRARIES := true
+# Aurora Store and microG
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/aurora/permissions_com.aurora.services.xml:system/etc/permissions/permissions_com.aurora.services.xml \
+
+PRODUCT_PACKAGES += \
+	AuroraServices \
+    AuroraStore \
+    
+$(call inherit-product, vendor/partner_gms/products/gms.mk)    
 
 ################################################################################
 

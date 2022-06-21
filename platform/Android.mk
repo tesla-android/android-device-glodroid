@@ -38,7 +38,7 @@ MAKE_COMMON := \
     PATH=/usr/local/bin:/usr/bin:/bin:/sbin:/usr/local/Cellar/dosfstools/4.2/sbin:$$PATH \
     ARCH=$(TARGET_ARCH) \
     CROSS_COMPILE=$(AOSP_TOP_ABS)/$(CROSS_COMPILE) \
-    lkmake
+    lkmake -j8
 
 ifeq ($(BUILD_KERNEL_USING_GCC),)
 #MAKE_COMMON_CLANG := CC=$(CLANG_ABS) HOSTCC=$(CLANG_ABS) LD=$(LLD_ABS)
