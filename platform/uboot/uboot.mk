@@ -22,8 +22,6 @@ UBOOT_OUT := $(PRODUCT_OUT)/obj/UBOOT_OBJ
 
 UBOOT_SRC_FILES := $(sort $(shell find -L $(UBOOT_SRC) -not -path '*/\.git/*'))
 
-SYSFS_MMC0_PATH ?= soc/1c0f000.mmc
-SYSFS_MMC1_PATH ?= soc/1c11000.mmc
 UBOOT_EMMC_DEV_INDEX := 1
 UBOOT_SD_DEV_INDEX := 0
 
@@ -42,12 +40,9 @@ endif
 endif
 
 UMAKE := \
-    PATH=/usr/bin:/bin:$$PATH \
-    ARCH=$(TARGET_ARCH) \
-    CROSS_COMPILE=$(AOSP_TOP_ABS)/$(CROSS_COMPILE) \
+    $(MAKE_COMMON) $(MAKE_COMMON_CLANG) \
     $(BL31_SET) \
     $(CRUST_FIRMWARE_SET) \
-    $(MAKE) \
     -C $(UBOOT_SRC) \
     O=$(AOSP_TOP_ABS)/$(UBOOT_OUT)
 
@@ -57,6 +52,8 @@ UBOOT_FRAGMENT_SD := $(UBOOT_OUT)/uboot-sd.config
 
 #-------------------------------------------------------------------------------
 ifeq ($(PRODUCT_BOARD_PLATFORM),sunxi)
+SYSFS_MMC0_PATH ?= soc/1c0f000.mmc
+SYSFS_MMC1_PATH ?= soc/1c11000.mmc
 UBOOT_FRAGMENTS	+= device/glodroid/platform/common/sunxi/uboot.config
 UBOOT_BINARY := $(UBOOT_OUT)/u-boot-sunxi-with-spl.bin
 endif
@@ -82,8 +79,8 @@ RK_BIN_DIR := $(ROCKCHIP_FIRMWARE_DIR)/$(RK33_BIN)
 RKTRUST_DIR := $(ROCKCHIP_FIRMWARE_DIR)/RKTRUST
 UBOOT_EMMC_DEV_INDEX := 0
 UBOOT_SD_DEV_INDEX := 1
-SYSFS_MMC0_PATH := fe330000.sdhci
-SYSFS_MMC1_PATH := fe320000.mmc
+SYSFS_MMC0_PATH ?= fe330000.sdhci
+SYSFS_MMC1_PATH ?= fe320000.mmc
 endif
 
 $(UBOOT_FRAGMENT_EMMC):
@@ -97,16 +94,16 @@ $(UBOOT_BINARY): $(UBOOT_FRAGMENTS) $(UBOOT_FRAGMENT_SD) $(UBOOT_FRAGMENT_EMMC) 
 	@echo "TARGET_PRODUCT = " $(TARGET_PRODUCT):
 	mkdir -p $(UBOOT_OUT)
 	$(UMAKE) $(UBOOT_DEFCONFIG)
-	PATH=/usr/bin:/bin $(UBOOT_SRC)/scripts/kconfig/merge_config.sh -m -O $(UBOOT_OUT)/ $(UBOOT_OUT)/.config $(UBOOT_FRAGMENTS) $(UBOOT_FRAGMENT_SD)
+	PATH=/usr/local/bin:/usr/bin:/bin $(UBOOT_SRC)/scripts/kconfig/merge_config.sh -m -O $(UBOOT_OUT)/ $(UBOOT_OUT)/.config $(UBOOT_FRAGMENTS) $(UBOOT_FRAGMENT_SD)
 	$(UMAKE) olddefconfig
 	$(UMAKE) KCFLAGS="$(UBOOT_KCFLAGS)"
 	cp $@ $@.sd
 ifneq ($(PRODUCT_HAS_EMMC),)
 	$(UMAKE) $(UBOOT_DEFCONFIG)
 ifeq ($(PRODUCT_BOARD_PLATFORM),rockchip)
-	PATH=/usr/bin:/bin $(UBOOT_SRC)/scripts/kconfig/merge_config.sh -m -O $(UBOOT_OUT)/ $(UBOOT_OUT)/.config $(UBOOT_FRAGMENTS) $(UBOOT_FRAGMENT_ROCKCHIP_EMMC) $(UBOOT_FRAGMENT_EMMC)
+	PATH=/usr/local/bin:/usr/bin:/bin $(UBOOT_SRC)/scripts/kconfig/merge_config.sh -m -O $(UBOOT_OUT)/ $(UBOOT_OUT)/.config $(UBOOT_FRAGMENTS) $(UBOOT_FRAGMENT_ROCKCHIP_EMMC) $(UBOOT_FRAGMENT_EMMC)
 else
-	PATH=/usr/bin:/bin $(UBOOT_SRC)/scripts/kconfig/merge_config.sh -m -O $(UBOOT_OUT)/ $(UBOOT_OUT)/.config $(UBOOT_FRAGMENTS) $(UBOOT_FRAGMENT_EMMC)
+	PATH=/usr/local/bin:/usr/bin:/bin $(UBOOT_SRC)/scripts/kconfig/merge_config.sh -m -O $(UBOOT_OUT)/ $(UBOOT_OUT)/.config $(UBOOT_FRAGMENTS) $(UBOOT_FRAGMENT_EMMC)
 endif
 	$(UMAKE) olddefconfig
 	$(UMAKE) KCFLAGS="$(UBOOT_KCFLAGS)"
@@ -128,8 +125,8 @@ $(UBOOT_OUT)/boot.scr: $(BOOTSCRIPT_GEN) $(UBOOT_BINARY)
 
 $(PRODUCT_OUT)/env.img: $(UBOOT_OUT)/boot.scr
 	rm -f $@
-	/sbin/mkfs.vfat -n "uboot-scr" -S 512 -C $@ 256
-	/usr/bin/mcopy -i $@ -s $< ::$(notdir $<)
+	/usr/local/Cellar/dosfstools/4.2/sbin/mkfs.vfat -n "uboot-scr" -S 512 -C $@ 256
+	/usr/local/bin/mcopy -i $@ -s $< ::$(notdir $<)
 
 $(UBOOT_OUT)/bootloader.img: $(UBOOT_BINARY)
 	cp -f $< $@
@@ -179,21 +176,21 @@ BOOT_FILES := \
     $(RPI_FIRMWARE_DIR)/boot/start4x.elf \
     $(RPI_FIRMWARE_DIR)/boot/fixup_x.dat \
     $(RPI_FIRMWARE_DIR)/boot/fixup4x.dat \
-    $(RPI_FIRMWARE_DIR)/boot/bcm2710-rpi-3-b.dtb \
-    $(RPI_FIRMWARE_DIR)/boot/bcm2710-rpi-3-b-plus.dtb \
-    $(PRODUCT_OUT)/obj/KERNEL_OBJ/arch/$(TARGET_ARCH)/boot/dts/$(KERNEL_DTB_FILE) \
+    $(PRODUCT_OUT)/obj/KERNEL_OBJ/arch/$(TARGET_ARCH)/boot/dts/broadcom/bcm2711-rpi-4-b.dtb \
+    $(PRODUCT_OUT)/obj/KERNEL_OBJ/arch/$(TARGET_ARCH)/boot/dts/broadcom/bcm2711-rpi-400.dtb \
+    $(PRODUCT_OUT)/obj/KERNEL_OBJ/arch/$(TARGET_ARCH)/boot/dts/broadcom/bcm2711-rpi-cm4.dtb \
 
 OVERLAY_FILES := $(sort $(shell find -L $(RPI_FIRMWARE_DIR)/boot/overlays))
 
 $(PRODUCT_OUT)/bootloader-sd.img: $(UBOOT_BINARY) $(OVERLAY_FILES) $(ATF_BINARY) $(RPI_CONFIG) $(KERNEL_BINARY)
 	dd if=/dev/null of=$@ bs=1 count=1 seek=$$(( 128 * 1024 * 1024 - 256 * 512 ))
-	/sbin/mkfs.vfat -F 32 -n boot $@
-	/usr/bin/mcopy -i $@ $(UBOOT_BINARY) ::$(notdir $(UBOOT_BINARY))
-	/usr/bin/mcopy -i $@ $(ATF_BINARY) ::$(notdir $(ATF_BINARY))
-	/usr/bin/mcopy -i $@ $(RPI_CONFIG) ::$(notdir $(RPI_CONFIG))
-	/usr/bin/mcopy -i $@ $(BOOT_FILES) ::
-	/usr/bin/mmd -i $@ ::overlays
-	/usr/bin/mcopy -i $@ $(OVERLAY_FILES) ::overlays/
+	/usr/local/Cellar/dosfstools/4.2/sbin/mkfs.vfat -F 32 -n boot $@
+	/usr/local/bin/mcopy -i $@ $(UBOOT_BINARY) ::$(notdir $(UBOOT_BINARY))
+	/usr/local/bin/mcopy -i $@ $(ATF_BINARY) ::$(notdir $(ATF_BINARY))
+	/usr/local/bin/mcopy -i $@ $(RPI_CONFIG) ::$(notdir $(RPI_CONFIG))
+	/usr/local/bin/mcopy -i $@ $(BOOT_FILES) ::
+	/usr/local/bin/mmd -i $@ ::overlays
+	/usr/local/bin/mcopy -i $@ $(OVERLAY_FILES) ::overlays/
 endif
 
 ifneq ($(PRODUCT_HAS_EMMC),)

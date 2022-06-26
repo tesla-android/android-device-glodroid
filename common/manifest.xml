@@ -1,4 +1,4 @@
-<manifest version="1.0" type="device" target-level="7">
+<manifest version="1.0" type="device" target-level="6">
     <hal format="hidl">
         <name>android.hardware.audio</name>
         <transport>hwbinder</transport>
@@ -36,5 +36,23 @@
             <instance>external/0</instance>
             <instance>legacy/0</instance>
         </interface>
+    </hal>
+    <hal format="hidl">
+        <name>android.hardware.drm</name>
+        <transport>hwbinder</transport>
+        <impl level="generic"></impl>
+        <version>1.0</version>
+        <interface>
+            <name>ICryptoFactory</name>
+            <instance>widevine</instance>
+            <instance>default</instance>
+        </interface>
+        <interface>
+            <name>IDrmFactory</name>
+            <instance>widevine</instance>
+            <instance>default</instance>
+        </interface>
+        <fqname>@1.4::ICryptoFactory/clearkey</fqname>
+        <fqname>@1.4::IDrmFactory/clearkey</fqname>
     </hal>
 </manifest>

@@ -66,6 +66,7 @@ service virtual_touchscreen_websocket_relay /vendor/bin/virtual_touchscreen_webs
     oneshot
 
 on property:sys.boot_completed=1
+    write /proc/sys/kernel/printk 3
     start preinstall
     start virtual_touchscreen_websocket_relay
 

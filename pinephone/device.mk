@@ -40,6 +40,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/sensors.pinephone.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/sensors.pinephone.rc \
     $(LOCAL_PATH)/typec.pinephone.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/typec.pinephone.rc \
     $(LOCAL_PATH)/modem.pinephone.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/modem.pinephone.rc \
+    device/glodroid/common/no_animation.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/no_animation.rc \
 
 PRODUCT_COPY_FILES += \
     device/glodroid/pinephone/audio.pinephone.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio.pinephone.xml \
@@ -56,10 +57,6 @@ PRODUCT_PACKAGES += \
     sensors.iio \
     android.hardware.sensors@1.0-impl:64 \
     android.hardware.sensors@1.0-service
-
-DEVICE_PACKAGE_OVERLAYS := \
-    device/glodroid/overlays/common \
-    device/glodroid/pinephone/overlay
 
 # SUNXI has broken drm/sun4i DE2 kernel driver.
 # Disable scaling to avoid UI glitches.

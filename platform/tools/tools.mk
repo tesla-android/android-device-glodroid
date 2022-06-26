@@ -1,6 +1,6 @@
 GENSDIMG := $(PLATFORM_PATH)/tools/gensdimg.sh
 
-NATIVE_PATH := PATH=/sbin:/bin:/usr/bin:$$PATH
+NATIVE_PATH := PATH=/sbin:/bin:/usr/bin:/usr/local/bin:$$PATH
 
 DEPLOY_TOOLS := \
 	$(HOST_OUT_EXECUTABLES)/adb \
@@ -25,6 +25,7 @@ DEPLOY_FILES := \
 	$(PRODUCT_OUT)/deploy-sd.img \
 	$(PRODUCT_OUT)/boot.img \
 	$(PRODUCT_OUT)/boot_dtbo.img \
+	$(PRODUCT_OUT)/vendor_boot.img \
 	$(PRODUCT_OUT)/super.img \
 	$(PRODUCT_OUT)/deploy-gpt.img \
 

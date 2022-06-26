@@ -45,13 +45,6 @@ endif
 
 PRODUCT_SHIPPING_API_LEVEL := 31
 
-# Set custom settings
-DEVICE_PACKAGE_OVERLAYS := device/linaro/hikey/overlay
-ifneq (,$(filter $(DEVICE_TYPE),tv))
-# Set TV Custom Settings
-DEVICE_PACKAGE_OVERLAYS += device/google/atv/overlay
-endif
-
 # Add wifi-related packages
 PRODUCT_PACKAGES += libwpa_client wpa_supplicant hostapd wificond
 PRODUCT_PROPERTY_OVERRIDES += wifi.interface=wlan0 \
@@ -97,8 +90,8 @@ PRODUCT_PACKAGES += \
 
 # Boot control
 PRODUCT_PACKAGES += \
-    bootctrl.default \
     android.hardware.boot@1.2-impl \
+    android.hardware.boot@1.2-impl.recovery \
     android.hardware.boot@1.2-service \
 
 # Thermal HAL
@@ -121,20 +114,7 @@ PRODUCT_PACKAGES += \
     android.hardware.graphics.composer@2.4-impl \
     android.hardware.graphics.composer@2.4-service \
 
-## Composer HAL for minigbm + minigbm gralloc0:
-#PRODUCT_PACKAGES += \
-#    android.hardware.graphics.allocator@2.0-impl \
-#    android.hardware.graphics.allocator@2.0-service \
-#    android.hardware.graphics.mapper@2.0-impl-2.1 \
-#    hwcomposer.drm_minigbm \
-#    gralloc.minigbm \
-#
-#PRODUCT_PROPERTY_OVERRIDES += \
-#    ro.hardware.gralloc=minigbm \
-#    ro.hardware.hwcomposer=drm_minigbm \
-##
-
-## Composer HAL for gralloc4 + minigbm gralloc4: (Require changes in manifest)
+## Composer HAL for gralloc4 + minigbm gralloc4
 PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@4.0-service.minigbm_gbm_mesa \
     android.hardware.graphics.mapper@4.0-impl.minigbm_gbm_mesa \
@@ -144,29 +124,16 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.hardware.hwcomposer=drm \
 ##
 
-## Composer HAL for libdrm_gralloc + gbm_gralloc (gralloc0):
-#PRODUCT_PACKAGES += \
-#    android.hardware.graphics.allocator@2.0-impl \
-#    android.hardware.graphics.allocator@2.0-service \
-#    android.hardware.graphics.mapper@2.0-impl-2.1 \
-#    hwcomposer.drm \
-#    gralloc.gbm \
-#
-#PRODUCT_PROPERTY_OVERRIDES += \
-#    ro.hardware.gralloc=gbm \
-#    ro.hardware.hwcomposer=drm \
-##
-
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sf.lcd_density=240 \
+    ro.sf.lcd_density=180 \
 
 # Gatekeeper HAL
 PRODUCT_PACKAGES += \
     android.hardware.gatekeeper@1.0-service.software \
 
-# Keymaster HAL
+# Keymint HAL
 PRODUCT_PACKAGES += \
-    android.hardware.keymaster@4.1-service
+    android.hardware.security.keymint-service
 
 # PowerHAL
 PRODUCT_PACKAGES += \
@@ -174,8 +141,8 @@ PRODUCT_PACKAGES += \
 
 # Health HAL
 PRODUCT_PACKAGES += \
-    android.hardware.health-service.example \
-    android.hardware.health-service.example_recovery \
+    android.hardware.health@2.1-service \
+    android.hardware.health@2.1-impl \
 
 ifneq (,$(filter $(DEVICE_TYPE),tv))
 # TV Specific Packages
@@ -196,33 +163,31 @@ else
 
 # Use Launcher3QuickStep
 PRODUCT_PACKAGES += Launcher3QuickStep
-PRODUCT_PROPERTY_OVERRIDES += ro.sf.lcd_density=240
 endif
 
 #External USB Camera HAL
-PRODUCT_PACKAGES += \
-    android.hardware.camera.provider@2.5-external-service \
+# PRODUCT_PACKAGES += \
+#     android.hardware.camera.provider@2.5-external-service \
+# 
+# PRODUCT_COPY_FILES += \
+#     device/glodroid/common/external_camera_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/external_camera_config.xml
+# 
+# #Camera HAL
+# PRODUCT_PACKAGES += \
+#     camera.libcamera \
+#     android.hardware.camera.provider@2.5-service_64 \
+# 
+# PRODUCT_PROPERTY_OVERRIDES += ro.hardware.camera=libcamera
 
-PRODUCT_COPY_FILES += \
-    device/glodroid/common/external_camera_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/external_camera_config.xml
-
-#Camera HAL
-PRODUCT_PACKAGES += \
-    camera.libcamera \
-    android.hardware.camera.provider@2.5-service_64 \
-
-PRODUCT_PROPERTY_OVERRIDES += ro.hardware.camera=libcamera
-
-PRODUCT_COPY_FILES +=  \
-    frameworks/native/data/etc/android.hardware.camera.concurrent.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.concurrent.xml \
-    frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.flash-autofocus.xml \
-    frameworks/native/data/etc/android.hardware.camera.front.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.front.xml \
-    frameworks/native/data/etc/android.hardware.camera.full.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.full.xml \
-    frameworks/native/data/etc/android.hardware.camera.raw.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.raw.xml \
+# PRODUCT_COPY_FILES +=  \
+#     frameworks/native/data/etc/android.hardware.camera.concurrent.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.concurrent.xml \
+#     frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.flash-autofocus.xml \
+#     frameworks/native/data/etc/android.hardware.camera.front.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.front.xml \
+#     frameworks/native/data/etc/android.hardware.camera.full.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.full.xml \
+#     frameworks/native/data/etc/android.hardware.camera.raw.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.raw.xml \
 
 # Copy hardware config file(s)
 PRODUCT_COPY_FILES +=  \
-        device/linaro/hikey/etc/permissions/android.hardware.screen.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.screen.xml \
         device/linaro/hikey/etc/permissions/android.software.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.xml \
         frameworks/native/data/etc/android.software.cts.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.cts.xml \
         frameworks/native/data/etc/android.software.app_widgets.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.app_widgets.xml \
@@ -298,10 +263,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.recovery.glodroid.rc:recovery/root/init.recovery.$(TARGET_PRODUCT).rc \
 
-# Tools
-PRODUCT_COPY_FILES += \
-    device/glodroid/platform/tools/flash-all.sh:flash-all.sh \
-
 PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS := false
 
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
@@ -313,21 +274,27 @@ PRODUCT_COPY_FILES += \
 ################################################################################
 
 # Screen orientation lock
+PRODUCT_COPY_FILES += frameworks/native/data/etc/android.hardware.screen.landscape.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.screen.landscape.xml \
+
 PRODUCT_PROPERTY_OVERRIDES += \
     config.override_forced_orient=false \
     ro.sf.hwrotation=0 \
     persist.demo.hdmirotation=landscape \
+    persist.demo.rotationlock=true \
+    persist.demo.remoterotation=landscape \
 
 ################################################################################
 
-# Google Apps
-$(call inherit-product, vendor/opengapps/build/opengapps-packages.mk)
+# Aurora Store and microG
 
-GAPPS_VARIANT := nano
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/aurora/permissions_com.aurora.services.xml:system/etc/permissions/permissions_com.aurora.services.xml \
 
-GAPPS_FORCE_PACKAGE_OVERRIDES := true
-
-PRODUCT_BROKEN_VERIFY_USES_LIBRARIES := true
+PRODUCT_PACKAGES += \
+	AuroraServices \
+    AuroraStore \
+    
+$(call inherit-product, vendor/partner_gms/products/gms.mk)    
 
 ################################################################################
 
@@ -335,3 +302,32 @@ PRODUCT_BROKEN_VERIFY_USES_LIBRARIES := true
 
 PRODUCT_PACKAGES += \
     Jelly \
+
+################################################################################
+
+# usb_modeswitch
+
+PRODUCT_PACKAGES += \
+    usb_modeswitch \
+    
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/usb_modeswitch.conf:$(TARGET_COPY_OUT_VENDOR)/etc/usb_modeswitch.conf \
+    
+################################################################################
+
+# v4l2
+
+PRODUCT_PACKAGES += \
+    v4l2-dbg \
+    v4l2-compliance \
+    v4l2-ctl \
+        
+################################################################################
+    
+PRODUCT_PACKAGES += \
+    glodroid_overlay_frameworks_base_core \
+    glodroid_overlay_settings_provider \
+    glodroid_overlay_systemui \
+    glodroid_overlay_service_wifi_resources \
+
+PRODUCT_SOONG_NAMESPACES += device/glodroid

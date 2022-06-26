@@ -15,7 +15,7 @@ PTR=$PART_START
 pn=1
 
 add_part() {
-	SIZE=$(stat $1 -c%s)
+	SIZE=$(gstat $1 -c%s)
 	# Align size
 	echo $1: size=$SIZE
 	echo $1: partition offset=$PTR
@@ -36,7 +36,7 @@ add_part() {
 
 prepare_disk() {
     if [ -e "$SDIMG" ]; then
-        SDSIZE=$(stat $SDIMG -c%s)
+        SDSIZE=$(gstat $SDIMG -c%s)
     else
         SDSIZE=$(( 1024 * 1024 * $1 ))
         echo "===> Create raw disk image"
