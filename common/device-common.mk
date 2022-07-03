@@ -321,6 +321,16 @@ PRODUCT_PACKAGES += \
     v4l2-dbg \
     v4l2-compliance \
     v4l2-ctl \
+    
+################################################################################
+
+# Audio Capture
+    
+PRODUCT_PACKAGES += \
+    AudioCapture \
+    
+PRODUCT_COPY_FILES += \
+    device/glodroid/common/audiocapture/startAudioCapture.sh:$(TARGET_COPY_OUT_VENDOR)/etc/startAudioCapture.sh \
         
 ################################################################################
     

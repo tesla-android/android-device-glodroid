@@ -51,6 +51,13 @@ on zygote-start
     mkdir /data/vendor/wifi/wpa 0770 wifi wifi
     mkdir /data/vendor/wifi/wpa/sockets 0770 wifi wifi
 
+service audiocapture /system/bin/sh /vendor/etc/startAudioCapture.sh
+     user root
+     group root
+     seclabel u:r:init:s0
+     disabled
+     oneshot
+
 service preinstall /system/bin/sh /vendor/etc/preinstall/preinstall.sh
      user root
      group root
@@ -69,6 +76,7 @@ on property:sys.boot_completed=1
     write /proc/sys/kernel/printk 3
     start preinstall
     start virtual_touchscreen_websocket_relay
+    start audiocapture
 
 service bugreport /system/bin/dumpstate -d -p -B -z \
     -o /data/user_de/0/com.android.shell/files/bugreports/bugreport
