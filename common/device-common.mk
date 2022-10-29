@@ -321,6 +321,88 @@ PRODUCT_PACKAGES += \
     v4l2-dbg \
     v4l2-compliance \
     v4l2-ctl \
+    
+################################################################################
+
+# mjpg_streamer
+
+PRODUCT_PACKAGES += \
+    mjpg_streamer \
+    input_control \
+    input_file \
+    input_http \
+    input_uvc \
+    output_file \
+    output_http \
+    output_rtsp \
+    output_udp \
+    
+PRODUCT_COPY_FILES += \
+     device/glodroid/common/edid.txt:$(TARGET_COPY_OUT_VENDOR)/tesla-android/edid.txt \
+     device/glodroid/common/startTeslaAndroid.sh:$(TARGET_COPY_OUT_VENDOR)/etc/startTeslaAndroid.sh \
+     
+################################################################################
+
+# lighttpd
+
+PRODUCT_COPY_FILES += \
+     device/glodroid/common/lighttpd/lighttpd:$(TARGET_COPY_OUT_VENDOR)/bin/lighttpd \
+     device/glodroid/common/lighttpd/lighttpd.conf:$(TARGET_COPY_OUT_VENDOR)/tesla-android/lighttpd/lighttpd.conf \
+     device/glodroid/common/lighttpd/www/assets/AssetManifest.json:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/assets/AssetManifest.json \
+     device/glodroid/common/lighttpd/www/assets/FontManifest.json:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/assets/FontManifest.json \
+     device/glodroid/common/lighttpd/www/assets/NOTICES:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/assets/NOTICES \
+     device/glodroid/common/lighttpd/www/assets/fonts/MaterialIcons-Regular.otf:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/assets/fonts/MaterialIcons-Regular.otf \
+     device/glodroid/common/lighttpd/www/assets/images/png/tesla-android-logo.png:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/assets/images/png/tesla-android-logo.png \
+     device/glodroid/common/lighttpd/www/assets/shaders/ink_sparkle.frag:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/assets/shaders/ink_sparkle.frag \
+     device/glodroid/common/lighttpd/www/browserconfig.xml:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/browserconfig.xml \
+     device/glodroid/common/lighttpd/www/canvaskit/canvaskit.js:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/canvaskit/canvaskit.js \
+     device/glodroid/common/lighttpd/www/canvaskit/canvaskit.wasm:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/canvaskit/canvaskit.wasm \
+     device/glodroid/common/lighttpd/www/canvaskit/profiling/canvaskit.js:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/canvaskit/profiling/canvaskit.js \
+     device/glodroid/common/lighttpd/www/canvaskit/profiling/canvaskit.wasm:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/canvaskit/profiling/canvaskit.wasm \
+     device/glodroid/common/lighttpd/www/favicon.ico:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/favicon.ico \
+     device/glodroid/common/lighttpd/www/flutter.js:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/flutter.js \
+     device/glodroid/common/lighttpd/www/flutter_service_worker.js:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/flutter_service_worker.js \
+     device/glodroid/common/lighttpd/www/icons/android-icon-144x144.png:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/icons/android-icon-144x144.png \
+     device/glodroid/common/lighttpd/www/icons/android-icon-192x192.png:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/icons/android-icon-192x192.png \
+     device/glodroid/common/lighttpd/www/icons/android-icon-36x36.png:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/icons/android-icon-36x36.png \
+     device/glodroid/common/lighttpd/www/icons/android-icon-48x48.png:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/icons/android-icon-48x48.png \
+     device/glodroid/common/lighttpd/www/icons/android-icon-72x72.png:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/icons/android-icon-72x72.png \
+     device/glodroid/common/lighttpd/www/icons/android-icon-96x96.png:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/icons/android-icon-96x96.png \
+     device/glodroid/common/lighttpd/www/icons/apple-icon-114x114.png:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/icons/apple-icon-114x114.png \
+     device/glodroid/common/lighttpd/www/icons/apple-icon-120x120.png:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/icons/apple-icon-120x120.png \
+     device/glodroid/common/lighttpd/www/icons/apple-icon-144x144.png:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/icons/apple-icon-144x144.png \
+     device/glodroid/common/lighttpd/www/icons/apple-icon-152x152.png:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/icons/apple-icon-152x152.png \
+     device/glodroid/common/lighttpd/www/icons/apple-icon-180x180.png:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/icons/apple-icon-180x180.png \
+     device/glodroid/common/lighttpd/www/icons/apple-icon-57x57.png:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/icons/apple-icon-57x57.png \
+     device/glodroid/common/lighttpd/www/icons/apple-icon-60x60.png:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/icons/apple-icon-60x60.png \
+     device/glodroid/common/lighttpd/www/icons/apple-icon-72x72.png:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/icons/apple-icon-72x72.png \
+     device/glodroid/common/lighttpd/www/icons/apple-icon-76x76.png:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/icons/apple-icon-76x76.png \
+     device/glodroid/common/lighttpd/www/icons/apple-icon-precomposed.png:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/icons/apple-icon-precomposed.png \
+     device/glodroid/common/lighttpd/www/icons/apple-icon.png:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/icons/apple-icon.png \
+     device/glodroid/common/lighttpd/www/icons/favicon-16x16.png:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/icons/favicon-16x16.png \
+     device/glodroid/common/lighttpd/www/icons/favicon-32x32.png:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/icons/favicon-32x32.png \
+     device/glodroid/common/lighttpd/www/icons/favicon-96x96.png:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/icons/favicon-96x96.png \
+     device/glodroid/common/lighttpd/www/icons/manifest.json:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/icons/manifest.json \
+     device/glodroid/common/lighttpd/www/icons/ms-icon-144x144.png:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/icons/ms-icon-144x144.png \
+     device/glodroid/common/lighttpd/www/icons/ms-icon-150x150.png:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/icons/ms-icon-150x150.png \
+     device/glodroid/common/lighttpd/www/icons/ms-icon-310x310.png:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/icons/ms-icon-310x310.png \
+     device/glodroid/common/lighttpd/www/icons/ms-icon-70x70.png:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/icons/ms-icon-70x70.png \
+     device/glodroid/common/lighttpd/www/index.html:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/index.html \
+     device/glodroid/common/lighttpd/www/main.dart.js:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/main.dart.js \
+     device/glodroid/common/lighttpd/www/online/status.html:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/online/status.html \
+     device/glodroid/common/lighttpd/www/pcmplayer.js:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/pcmplayer.js \
+     device/glodroid/common/lighttpd/www/player.html:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/player.html \
+     device/glodroid/common/lighttpd/www/version.json:$(TARGET_COPY_OUT_VENDOR)/tesla-android/www/version.json \
+
+################################################################################
+
+# Audio Capture
+
+PRODUCT_PACKAGES += \
+     AudioCapture \
+  
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.control_privapp_permissions=log \
         
 ################################################################################
     

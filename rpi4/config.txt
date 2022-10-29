@@ -19,3 +19,5 @@ max_framebuffers=2
 
 # Automatically load overlays for detected DSI displays
 display_auto_detect=1
+
+dtoverlay=tc358743

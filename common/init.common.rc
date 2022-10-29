@@ -1,4 +1,4 @@
-# Copyright 2019 The Android Open Source Project
+do # Copyright 2019 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -50,6 +50,9 @@ on zygote-start
     mkdir /data/vendor/wifi 0771 wifi wifi
     mkdir /data/vendor/wifi/wpa 0770 wifi wifi
     mkdir /data/vendor/wifi/wpa/sockets 0770 wifi wifi
+    # Create directories for lighttpd logs
+    mkdir /data/vendor/tesla-android
+    mkdir /data/vendor/tesla-android/lighttpd
 
 service preinstall /system/bin/sh /vendor/etc/preinstall/preinstall.sh
      user root
@@ -57,6 +60,13 @@ service preinstall /system/bin/sh /vendor/etc/preinstall/preinstall.sh
      seclabel u:r:init:s0
      disabled
      oneshot
+     
+service tesla_android /system/bin/sh /vendor/etc/startTeslaAndroid.sh
+     user root
+     group root
+     seclabel u:r:init:s0
+     disabled
+     oneshot     
 
 service virtual_touchscreen_websocket_relay /vendor/bin/virtual_touchscreen_websocket_relay
     user root
@@ -66,10 +76,11 @@ service virtual_touchscreen_websocket_relay /vendor/bin/virtual_touchscreen_webs
     oneshot
 
 on property:sys.boot_completed=1
-    write /proc/sys/kernel/printk 3
+    write /proc/sys/kernel/printk 3	
     start preinstall
     start virtual_touchscreen_websocket_relay
-
+    start tesla_android
+	
 service bugreport /system/bin/dumpstate -d -p -B -z \
     -o /data/user_de/0/com.android.shell/files/bugreports/bugreport
     class main

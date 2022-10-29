@@ -19,8 +19,8 @@ modalias_handling enabled
 /dev/iio:device1                                       0660    system       system
 /dev/iio:device2                                       0660    system       system
 /dev/iio:device3                                       0660    system       system
-/dev/video*                                            0660    system       camera
-/dev/media*                                            0660    system       camera
+/dev/video*                                            0777    system       camera
+/dev/media*                                            0777    system       camera
 /dev/v4l-subdev*                                       0660    system       camera
 
 /dev/dma_heap/system                                   0666    system       graphics
