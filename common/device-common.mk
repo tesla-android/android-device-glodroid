@@ -125,7 +125,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 ##
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sf.lcd_density=180 \
+    ro.sf.lcd_density=220 \
 
 # Gatekeeper HAL
 PRODUCT_PACKAGES += \
@@ -326,21 +326,12 @@ PRODUCT_PACKAGES += \
     
 ################################################################################
 
-# mjpg_streamer
+# tesla-android-virtual-display
 
 PRODUCT_PACKAGES += \
-    mjpg_streamer \
-    input_control \
-    input_file \
-    input_http \
-    input_uvc \
-    output_file \
-    output_http \
-    output_rtsp \
-    output_udp \
+    tesla-android-virtual-display \
     
 PRODUCT_COPY_FILES += \
-     device/glodroid/common/edid.txt:$(TARGET_COPY_OUT_VENDOR)/tesla-android/edid.txt \
      device/glodroid/common/startTeslaAndroid.sh:$(TARGET_COPY_OUT_VENDOR)/etc/startTeslaAndroid.sh \
      
 ################################################################################
