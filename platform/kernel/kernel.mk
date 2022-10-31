@@ -67,16 +67,12 @@ KMAKE := \
     $(MAKE_COMMON) $(MAKE_COMMON_CLANG) \
     -C $(KERNEL_SRC) O=$(AOSP_TOP_ABS)/$(KERNEL_OUT) \
     DTC_FLAGS='--symbols' \
-    
-KARTONMAKE := \
-	karton run android ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- \
-	make -C $(KERNEL_SRC) O=$(AOSP_TOP_ABS)/$(KERNEL_OUT)    
 
 #-------------------------------------------------------------------------------
 $(KERNEL_OUT)/.config: $(KERNEL_DEFCONFIG) $(KERNEL_FRAGMENTS) $(KERNEL_SRC_FILES)
 	cp $(KERNEL_DEFCONFIG) $(KERNEL_OUT)/.config
 	$(KMAKE) olddefconfig
-	PATH=/usr/bin:/bin:/usr/local/bin:$$PATH $(KERNEL_SRC)/scripts/kconfig/merge_config.sh -m -O $(KERNEL_OUT)/ $(KERNEL_OUT)/.config $(KERNEL_FRAGMENTS)
+	PATH=/usr/bin:/bin:$$PATH $(KERNEL_SRC)/scripts/kconfig/merge_config.sh -m -O $(KERNEL_OUT)/ $(KERNEL_OUT)/.config $(KERNEL_FRAGMENTS)
 	$(KMAKE) olddefconfig
 
 $(KERNEL_BINARY): $(KERNEL_SRC_FILES) $(KERNEL_OUT)/.config
@@ -92,7 +88,7 @@ $(KERNEL_COMPRESSED): $(KERNEL_BINARY)
 
 $(KERNEL_MODULES_OUT): $(KERNEL_BINARY)
 	rm -rf $@
-	$(KARTONMAKE) INSTALL_MOD_PATH=$(AOSP_TOP_ABS)/$@ modules_install
+	$(KMAKE) INSTALL_MOD_PATH=$(AOSP_TOP_ABS)/$@ modules_install
 
 $(TARGET_VENDOR_MODULES)/modules.dep : $(KERNEL_MODULES_OUT)
 	rm -rf $(TARGET_VENDOR_MODULES)/kernel
@@ -107,7 +103,7 @@ $(PRODUCT_OUT)/vendor_dlkm.img: $(TARGET_VENDOR_MODULES)/modules.dep
 #-------------------------------------------------------------------------------
 $(ANDROID_DTBO): $(ANDROID_DTS_OVERLAY)
 	rm -f $@
-	./prebuilts/misc/darwin-x86/dtc/dtc -@ -I dts -O dtb -o $@ $<
+	./prebuilts/misc/linux-x86/dtc/dtc -@ -I dts -O dtb -o $@ $<
 
 $(GEN_DTBCFG):
 	mkdir -p $(dir $@)

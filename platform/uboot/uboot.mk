@@ -40,9 +40,12 @@ endif
 endif
 
 UMAKE := \
-    $(MAKE_COMMON) $(MAKE_COMMON_CLANG) \
+    PATH=/usr/bin:/bin:$$PATH \
+    ARCH=$(TARGET_ARCH) \
+    CROSS_COMPILE=$(AOSP_TOP_ABS)/$(CROSS_COMPILE) \
     $(BL31_SET) \
     $(CRUST_FIRMWARE_SET) \
+    $(MAKE) \
     -C $(UBOOT_SRC) \
     O=$(AOSP_TOP_ABS)/$(UBOOT_OUT)
 
@@ -94,16 +97,16 @@ $(UBOOT_BINARY): $(UBOOT_FRAGMENTS) $(UBOOT_FRAGMENT_SD) $(UBOOT_FRAGMENT_EMMC) 
 	@echo "TARGET_PRODUCT = " $(TARGET_PRODUCT):
 	mkdir -p $(UBOOT_OUT)
 	$(UMAKE) $(UBOOT_DEFCONFIG)
-	PATH=/usr/local/bin:/usr/bin:/bin $(UBOOT_SRC)/scripts/kconfig/merge_config.sh -m -O $(UBOOT_OUT)/ $(UBOOT_OUT)/.config $(UBOOT_FRAGMENTS) $(UBOOT_FRAGMENT_SD)
+	PATH=/usr/bin:/bin $(UBOOT_SRC)/scripts/kconfig/merge_config.sh -m -O $(UBOOT_OUT)/ $(UBOOT_OUT)/.config $(UBOOT_FRAGMENTS) $(UBOOT_FRAGMENT_SD)
 	$(UMAKE) olddefconfig
 	$(UMAKE) KCFLAGS="$(UBOOT_KCFLAGS)"
 	cp $@ $@.sd
 ifneq ($(PRODUCT_HAS_EMMC),)
 	$(UMAKE) $(UBOOT_DEFCONFIG)
 ifeq ($(PRODUCT_BOARD_PLATFORM),rockchip)
-	PATH=/usr/local/bin:/usr/bin:/bin $(UBOOT_SRC)/scripts/kconfig/merge_config.sh -m -O $(UBOOT_OUT)/ $(UBOOT_OUT)/.config $(UBOOT_FRAGMENTS) $(UBOOT_FRAGMENT_ROCKCHIP_EMMC) $(UBOOT_FRAGMENT_EMMC)
+	PATH=/usr/bin:/bin $(UBOOT_SRC)/scripts/kconfig/merge_config.sh -m -O $(UBOOT_OUT)/ $(UBOOT_OUT)/.config $(UBOOT_FRAGMENTS) $(UBOOT_FRAGMENT_ROCKCHIP_EMMC) $(UBOOT_FRAGMENT_EMMC)
 else
-	PATH=/usr/local/bin:/usr/bin:/bin $(UBOOT_SRC)/scripts/kconfig/merge_config.sh -m -O $(UBOOT_OUT)/ $(UBOOT_OUT)/.config $(UBOOT_FRAGMENTS) $(UBOOT_FRAGMENT_EMMC)
+	PATH=/usr/bin:/bin $(UBOOT_SRC)/scripts/kconfig/merge_config.sh -m -O $(UBOOT_OUT)/ $(UBOOT_OUT)/.config $(UBOOT_FRAGMENTS) $(UBOOT_FRAGMENT_EMMC)
 endif
 	$(UMAKE) olddefconfig
 	$(UMAKE) KCFLAGS="$(UBOOT_KCFLAGS)"
@@ -125,8 +128,8 @@ $(UBOOT_OUT)/boot.scr: $(BOOTSCRIPT_GEN) $(UBOOT_BINARY)
 
 $(PRODUCT_OUT)/env.img: $(UBOOT_OUT)/boot.scr
 	rm -f $@
-	/usr/local/Cellar/dosfstools/4.2/sbin/mkfs.vfat -n "uboot-scr" -S 512 -C $@ 256
-	/usr/local/bin/mcopy -i $@ -s $< ::$(notdir $<)
+	/sbin/mkfs.vfat -n "uboot-scr" -S 512 -C $@ 256
+	/usr/bin/mcopy -i $@ -s $< ::$(notdir $<)
 
 $(UBOOT_OUT)/bootloader.img: $(UBOOT_BINARY)
 	cp -f $< $@
@@ -184,13 +187,13 @@ OVERLAY_FILES := $(sort $(shell find -L $(RPI_FIRMWARE_DIR)/boot/overlays))
 
 $(PRODUCT_OUT)/bootloader-sd.img: $(UBOOT_BINARY) $(OVERLAY_FILES) $(ATF_BINARY) $(RPI_CONFIG) $(KERNEL_BINARY)
 	dd if=/dev/null of=$@ bs=1 count=1 seek=$$(( 128 * 1024 * 1024 - 256 * 512 ))
-	/usr/local/Cellar/dosfstools/4.2/sbin/mkfs.vfat -F 32 -n boot $@
-	/usr/local/bin/mcopy -i $@ $(UBOOT_BINARY) ::$(notdir $(UBOOT_BINARY))
-	/usr/local/bin/mcopy -i $@ $(ATF_BINARY) ::$(notdir $(ATF_BINARY))
-	/usr/local/bin/mcopy -i $@ $(RPI_CONFIG) ::$(notdir $(RPI_CONFIG))
-	/usr/local/bin/mcopy -i $@ $(BOOT_FILES) ::
-	/usr/local/bin/mmd -i $@ ::overlays
-	/usr/local/bin/mcopy -i $@ $(OVERLAY_FILES) ::overlays/
+	/sbin/mkfs.vfat -F 32 -n boot $@
+	/usr/bin/mcopy -i $@ $(UBOOT_BINARY) ::$(notdir $(UBOOT_BINARY))
+	/usr/bin/mcopy -i $@ $(ATF_BINARY) ::$(notdir $(ATF_BINARY))
+	/usr/bin/mcopy -i $@ $(RPI_CONFIG) ::$(notdir $(RPI_CONFIG))
+	/usr/bin/mcopy -i $@ $(BOOT_FILES) ::
+	/usr/bin/mmd -i $@ ::overlays
+	/usr/bin/mcopy -i $@ $(OVERLAY_FILES) ::overlays/
 endif
 
 ifneq ($(PRODUCT_HAS_EMMC),)

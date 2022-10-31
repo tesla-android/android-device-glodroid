@@ -15,7 +15,7 @@ ATF_SRC_FILES   := $(sort $(shell find -L $(ATF_SRC) -not -path '*/\.git/*'))
 
 #-------------------------------------------------------------------------------
 M0_TRIPLE := arm-eabi
-M0_COMPILE := M0_CROSS_COMPILE=$(AOSP_TOP_ABS)/prebuilts/gcc/darwin-x86/arm/$(M0_TRIPLE)-4.8/bin/$(M0_TRIPLE)-
+M0_COMPILE := M0_CROSS_COMPILE=$(AOSP_TOP_ABS)/prebuilts/gcc/linux-x86/arm/gcc-linaro-$(M0_TRIPLE)/bin/$(M0_TRIPLE)-
 
 $(ATF_BINARY): $(ATF_SRC_FILES)
 	$(M0_COMPILE) $(MAKE_COMMON) -C $(ATF_SRC) BUILD_BASE=$(AOSP_TOP_ABS)/$(ATF_OUT) PLAT=$(ATF_PLAT) DEBUG=1 bl31

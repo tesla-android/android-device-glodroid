@@ -115,7 +115,7 @@ BOARD_USES_TINYHAL_AUDIO := true
 TINYCOMPRESS_TSTAMP_IS_LONG := true
 TINYALSA_NO_ADD_NEW_CTRLS := true
 TINYALSA_NO_CTL_GET_ID := true
-USE_CAMERA_STUB := true
+#USE_CAMERA_STUB := true
 USE_OPENGL_RENDERER := true
 BOARD_USE_LEGACY_UI := true
 
@@ -128,8 +128,8 @@ BOARD_USES_PRODUCTIMAGE := true
 BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := ext4
 
 # Enable dex-preoptimization to speed up first boot sequence
-#DEX_PREOPT_DEFAULT := nostripping
-#WITH_DEXPREOPT := true
+DEX_PREOPT_DEFAULT := nostripping
+WITH_DEXPREOPT := true
 ART_USE_HSPACE_COMPACT := true
 
 DEVICE_MANIFEST_FILE := device/glodroid/common/manifest.xml
@@ -140,9 +140,9 @@ BOARD_VENDOR_SEPOLICY_DIRS       += device/glodroid/common/sepolicy/vendor
 
 BOARD_USES_GRALLOC_HANDLE := true
 
-# BOARD_LIBCAMERA_USES_MESON_BUILD := true
-# BOARD_LIBCAMERA_IPAS := raspberrypi
-# BOARD_LIBCAMERA_PIPELINES := simple raspberrypi
+BOARD_LIBCAMERA_USES_MESON_BUILD := true
+BOARD_LIBCAMERA_IPAS := raspberrypi
+BOARD_LIBCAMERA_PIPELINES := simple raspberrypi
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
 
 BOARD_USES_GLODROID_MAKE_TARGETS := true
