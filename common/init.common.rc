@@ -47,7 +47,7 @@ on post-fs-data
 
 on zygote-start
     # Create the directories used by the Wireless subsystem
-    mkdir /data/vendor/wifi 0771 wifi wifi
+    mkdir /data/vendor/wifi 0770 wifi wifi
     mkdir /data/vendor/wifi/wpa 0770 wifi wifi
     mkdir /data/vendor/wifi/wpa/sockets 0770 wifi wifi
     # Create directories for lighttpd logs
@@ -60,26 +60,31 @@ service preinstall /system/bin/sh /vendor/etc/preinstall/preinstall.sh
      seclabel u:r:init:s0
      disabled
      oneshot
-     
-service tesla_android /system/bin/sh /vendor/etc/startTeslaAndroid.sh
+
+service lighttpd /vendor/bin/lighttpd -f /vendor/tesla-android/lighttpd/lighttpd.conf -D
      user root
      group root
      seclabel u:r:init:s0
      disabled
-     oneshot     
+
+service tesla-android-virtual-display /system/bin/tesla-android-virtual-display
+    user root
+    group root
+    seclabel u:r:init:s0
+    disabled
 
 service virtual_touchscreen_websocket_relay /vendor/bin/virtual_touchscreen_websocket_relay
     user root
     group root
     seclabel u:r:init:s0
     disabled
-    oneshot
 
 on property:sys.boot_completed=1
     write /proc/sys/kernel/printk 3	
     start preinstall
     start virtual_touchscreen_websocket_relay
-    start tesla_android
+    start lighttpd
+    start tesla-android-virtual-display
     setprop sys.usb_modem_trigger true
 	
 service bugreport /system/bin/dumpstate -d -p -B -z \
