@@ -25,3 +25,6 @@ modalias_handling enabled
 
 /dev/dma_heap/system                                   0666    system       graphics
 /dev/dma_heap/linux,cma                                0666    system       graphics
+
+subsystem usbmisc
+    devname uevent_devname
