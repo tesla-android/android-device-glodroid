@@ -285,6 +285,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 ################################################################################
 
+# Google Apps
+$(call inherit-product, vendor/opengapps/build/opengapps-packages.mk) 
+
+GAPPS_VARIANT := pico
+GAPPS_FORCE_PACKAGE_OVERRIDES := true 
+PRODUCT_BROKEN_VERIFY_USES_LIBRARIES := true
+
+################################################################################
+
 # LineageOS browser
 
 PRODUCT_PACKAGES += \
