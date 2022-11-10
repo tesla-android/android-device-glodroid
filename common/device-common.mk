@@ -285,21 +285,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 ################################################################################
 
-# Aurora Store and microG
-
-PRODUCT_BROKEN_VERIFY_USES_LIBRARIES := true
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/aurora/permissions_com.aurora.services.xml:system/etc/permissions/permissions_com.aurora.services.xml \
-
-PRODUCT_PACKAGES += \
-	AuroraServices \
-    AuroraStore \
-    
-$(call inherit-product, vendor/partner_gms/products/gms.mk)    
-
-################################################################################
-
 # LineageOS browser
 
 PRODUCT_PACKAGES += \
