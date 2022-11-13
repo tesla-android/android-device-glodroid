@@ -289,8 +289,19 @@ PRODUCT_PROPERTY_OVERRIDES += \
 $(call inherit-product, vendor/opengapps/build/opengapps-packages.mk) 
 
 GAPPS_VARIANT := pico
-GAPPS_FORCE_PACKAGE_OVERRIDES := true 
+GAPPS_FORCE_PACKAGE_OVERRIDES := false
+GAPPS_EXCLUDED_PACKAGES := SetupWizard 
 PRODUCT_BROKEN_VERIFY_USES_LIBRARIES := true
+
+################################################################################
+
+# ih8sn
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/ih8sn/addon.d/60-ih8sn.sh:$(TARGET_COPY_OUT_SYSTEM)/addon.d/60-ih8sn.sh \
+    $(LOCAL_PATH)/ih8sn/bin/ih8sn:$(TARGET_COPY_OUT_SYSTEM)/bin/ih8sn \
+    $(LOCAL_PATH)/ih8sn/etc/init/ih8sn.rc:$(TARGET_COPY_OUT_SYSTEM)/etc/init/ih8sn.rc \
+    $(LOCAL_PATH)/ih8sn/etc/ih8sn.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/ih8sn.conf \
 
 ################################################################################
 
