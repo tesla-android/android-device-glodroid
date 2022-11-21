@@ -335,6 +335,12 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     tesla-android-virtual-display \
+
+################################################################################
+
+# Tablet mode
+     
+PRODUCT_CHARACTERISTICS := tablet     
      
 ################################################################################
 
