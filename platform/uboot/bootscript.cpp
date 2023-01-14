@@ -52,7 +52,7 @@ EXTENV(partitions, ";name=vbmeta_a,size=512K,uuid=\${uuid_gpt_vbmeta_a}")
 EXTENV(partitions, ";name=vbmeta_b,size=512K,uuid=\${uuid_gpt_vbmeta_b}")
 EXTENV(partitions, ";name=vbmeta_system_a,size=512K,uuid=\${uuid_gpt_vbmeta_system_a}")
 EXTENV(partitions, ";name=vbmeta_system_b,size=512K,uuid=\${uuid_gpt_vbmeta_system_b}")
-EXTENV(partitions, ";name=super,size=1800M,uuid=\${uuid_gpt_super}")
+EXTENV(partitions, ";name=super,size=2500M,uuid=\${uuid_gpt_super}")
 EXTENV(partitions, ";name=metadata,size=16M,uuid=\${uuid_gpt_metadata}")
 EXTENV(partitions, ";name=userdata,size=-,uuid=\${uuid_gpt_userdata}")
 
