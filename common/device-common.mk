@@ -130,7 +130,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 ##
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sf.lcd_density=160 \
+    ro.sf.lcd_density=180 \
 
 # USB and Gadget HALs
 PRODUCT_PACKAGES += \
@@ -177,7 +177,7 @@ else
 
 # Use Launcher3QuickStep
 PRODUCT_PACKAGES += Launcher3QuickStep
-PRODUCT_PROPERTY_OVERRIDES += ro.sf.lcd_density=160
+PRODUCT_PROPERTY_OVERRIDES += ro.sf.lcd_density=180
 endif
 
 #External USB Camera HAL
