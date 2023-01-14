@@ -105,8 +105,8 @@ BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
 
 BOARD_EXT4_SHARE_DUP_BLOCKS := true
 
-# Dynamic partition 1800 MiB
-BOARD_SUPER_PARTITION_SIZE := $(shell echo $$(( 1800 * 1024 * 1024 )))
+# Dynamic partition 2500 MiB
+BOARD_SUPER_PARTITION_SIZE := $(shell echo $$(( 2500 * 1024 * 1024 )))
 BOARD_BUILD_SUPER_IMAGE_BY_DEFAULT := true
 BOARD_SUPER_PARTITION_GROUPS := glodroid_dynamic_partitions
 BOARD_GLODROID_DYNAMIC_PARTITIONS_SIZE := $(shell echo $$(( $(BOARD_SUPER_PARTITION_SIZE) - (10 * 1024 * 1024) )))
