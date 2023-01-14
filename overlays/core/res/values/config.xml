@@ -27,7 +27,7 @@
     <!-- Whether a software navigation bar should be shown. NOTE: in the future this may be
          autodetected from the Configuration. -->
     <bool name="config_showNavigationBar">true</bool>
-
+    
     <!-- User activity timeout: Maximum screen dim duration as a percentage of screen off timeout.
 
          This resource is similar to config_maximumScreenDimDuration but the maximum
@@ -43,4 +43,8 @@
          dim before the device goes to sleep.
     -->
     <fraction name="config_maximumScreenDimRatio">40%</fraction>
+    
+    <bool name="config_forceDefaultOrientation">true</bool>
+    <bool name="config_supportAutoRotation">false</bool>
+    <bool name="config_deskDockEnablesAccelerometer">false</bool>
 </resources>

@@ -3,6 +3,6 @@ package {
 }
 
 runtime_resource_overlay {
-    name: "glodroid_overlay_frameworks_base_core_slow_gpu",
+    name: "glodroid_overlay_systemui",
     soc_specific: true,
 }

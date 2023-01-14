@@ -1,10 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.android.providers.settings.glodroid.overlay">
+    package="com.android.wifi.resources.glodroid.overlay">
 
     <application android:hasCode="false" />
 
     <overlay
-      android:targetPackage="com.android.providers.settings"
+      android:targetPackage="com.android.wifi.resources"
+      android:targetName="WifiCustomization"
       android:isStatic="true"
       android:priority="1"
       />

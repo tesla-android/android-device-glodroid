@@ -314,5 +314,7 @@ PRODUCT_BUILD_SUPER_PARTITION := true
 PRODUCT_PACKAGES += \
     glodroid_overlay_frameworks_base_core \
     glodroid_overlay_settings_provider \
+    glodroid_overlay_systemui \
+    glodroid_overlay_service_wifi_resources \
 
 PRODUCT_SOONG_NAMESPACES += device/glodroid external/v4l2_codec2
