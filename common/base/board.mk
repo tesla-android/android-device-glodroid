@@ -152,3 +152,6 @@ BOARD_VENDOR_SEPOLICY_DIRS       += device/glodroid/common/base/sepolicy/vendor
 
 # Enable GloDroid-specific build targets
 BOARD_USES_GLODROID_MAKE_TARGETS := true
+
+# FIXME = Remove prebuilt binaries with broken elf
+BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
