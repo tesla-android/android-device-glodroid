@@ -175,3 +175,7 @@ BOARD_LIBCAMERA_IPAS := raspberrypi
 BOARD_LIBCAMERA_PIPELINES := simple raspberrypi
 
 BOARD_USES_GLODROID_MAKE_TARGETS := true
+
+
+# FIXME = Remove prebuilt binaries with broken elf
+BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
