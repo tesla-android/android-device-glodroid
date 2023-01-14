@@ -239,13 +239,13 @@ PRODUCT_COPY_FILES += \
 
 ################# GLODROID ADDITIONAL PACKAGES SECTION #########################
 
-PRODUCT_COPY_FILES += \
-    device/glodroid/common/preinstall.sh:$(TARGET_COPY_OUT_VENDOR)/etc/preinstall/preinstall.sh                 \
-    prebuilts/applications/fdroid.apk:$(TARGET_COPY_OUT_VENDOR)/etc/preinstall/fdroid.apk_all                   \
-    prebuilts/applications/shade-launcher3.apk:$(TARGET_COPY_OUT_VENDOR)/etc/preinstall/shade-launcher3.apk_all \
-    prebuilts/applications/skytube.apk:$(TARGET_COPY_OUT_VENDOR)/etc/preinstall/skytube.apk_all                 \
-    prebuilts/applications/fenix-arm.apk:$(TARGET_COPY_OUT_VENDOR)/etc/preinstall/fenix.apk_arm                 \
-    prebuilts/applications/fenix-arm64.apk:$(TARGET_COPY_OUT_VENDOR)/etc/preinstall/fenix.apk_arm64             \
+#PRODUCT_COPY_FILES += \
+#    device/glodroid/common/preinstall.sh:$(TARGET_COPY_OUT_VENDOR)/etc/preinstall/preinstall.sh                 \
+#    prebuilts/applications/fdroid.apk:$(TARGET_COPY_OUT_VENDOR)/etc/preinstall/fdroid.apk_all                   \
+#    prebuilts/applications/shade-launcher3.apk:$(TARGET_COPY_OUT_VENDOR)/etc/preinstall/shade-launcher3.apk_all \
+#    prebuilts/applications/skytube.apk:$(TARGET_COPY_OUT_VENDOR)/etc/preinstall/skytube.apk_all                 \
+#    prebuilts/applications/fenix-arm.apk:$(TARGET_COPY_OUT_VENDOR)/etc/preinstall/fenix.apk_arm                 \
+#    prebuilts/applications/fenix-arm64.apk:$(TARGET_COPY_OUT_VENDOR)/etc/preinstall/fenix.apk_arm64             \
 
 ################################################################################
 
