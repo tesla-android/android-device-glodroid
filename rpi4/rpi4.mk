@@ -4,6 +4,7 @@
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, device/glodroid/rpi4/device.mk)
+$(call inherit-product, vendor/brcm/rpi4/rpi4-vendor.mk)
 
 PRODUCT_BOARD_PLATFORM := broadcom
 PRODUCT_NAME := rpi4

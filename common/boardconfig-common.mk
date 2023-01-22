@@ -176,6 +176,7 @@ BOARD_LIBCAMERA_PIPELINES := simple raspberrypi
 
 BOARD_USES_GLODROID_MAKE_TARGETS := true
 
+TARGET_ENABLE_MEDIADRM_64 := true
 
 # FIXME = Remove prebuilt binaries with broken elf
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
