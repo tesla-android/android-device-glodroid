@@ -33,6 +33,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.hardware.hwcomposer=drm_gd \
+    vendor.gralloc.minigbm.backend=gbm_mesa \
 ##
 
 GD_LCD_DENSITY ?= 160

@@ -1,0 +1,6 @@
+# V4L2 codec2
+/vendor/bin/hw/android\.hardware\.media\.c2@1\.0-service-v4l2(.*)?              u:object_r:mediacodec_exec:s0
+/vendor/lib(64)?/libc2plugin_store\.so						u:object_r:same_process_hal_file:s0
+
+# Ffmpeg_codec2
+/vendor/bin/hw/android\.hardware\.media\.c2@1\.2-service-ffmpeg(.*)?		u:object_r:mediacodec_exec:s0

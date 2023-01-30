@@ -1,0 +1,36 @@
+From c4571581b8c1dc2971413106f7eab26be693fd3c Mon Sep 17 00:00:00 2001
+From: Konsta <konsta09@gmail.com>
+Date: Sat, 7 Jan 2023 19:17:11 +0200
+Subject: [PATCH] gbm_mesa: add constraints for hardware video decoder &
+ encoder
+
+Change-Id: I41d2987b30f7a54b481cabb8be8ddab5c68eff63
+---
+ gbm_mesa_driver/gbm_mesa_internals.cpp | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+
+diff --git a/gbm_mesa_driver/gbm_mesa_internals.cpp b/gbm_mesa_driver/gbm_mesa_internals.cpp
+index 918742a..1773825 100644
+--- a/gbm_mesa_driver/gbm_mesa_internals.cpp
++++ b/gbm_mesa_driver/gbm_mesa_internals.cpp
+@@ -382,6 +382,20 @@ int gbm_mesa_bo_create(struct bo *bo, uint32_t width, uint32_t height, uint32_t
+ 		size_align = 4096;
+ 	}
+ 
++	/* RPI4 hwcodecs */
++	if (use_flags & (BO_USE_HW_VIDEO_DECODER | BO_USE_HW_VIDEO_ENCODER)) {
++		scanout_strong = true;
++		alloc_args.use_scanout = true;
++		alloc_args.width = ALIGN(alloc_args.width, 32);
++		size_align = 4096;
++	}
++
++	/* Allocate blobs in CMA */
++	if (format == DRM_FORMAT_R8) {
++		scanout_strong = true;
++		alloc_args.use_scanout = true;
++	}
++
+ 	if (alloc_args.drm_format == 0) {
+ 		/* Always use linear for spoofed format allocations. */
+ 		drv_bo_from_format(bo, alloc_args.width, alloc_args.height, format);
