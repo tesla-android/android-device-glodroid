@@ -27,8 +27,6 @@ DEPLOY_FILES := \
 	$(PRODUCT_OUT)/boot_dtbo.img \
 	$(PRODUCT_OUT)/vendor_boot.img \
 	$(PRODUCT_OUT)/super.img \
-	$(PRODUCT_OUT)/vbmeta.img \
-	$(PRODUCT_OUT)/vbmeta_system.img \
 	$(PRODUCT_OUT)/deploy-gpt.img \
 
 ifneq ($(PRODUCT_HAS_EMMC),)
