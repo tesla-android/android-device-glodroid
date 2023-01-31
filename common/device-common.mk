@@ -311,3 +311,13 @@ PRODUCT_BUILD_SUPER_PARTITION := true
 #    glodroid_overlay_service_wifi_resources \
 
 PRODUCT_SOONG_NAMESPACES += device/glodroid external/v4l2_codec2
+
+# FFmpeg_codec2
+PRODUCT_PACKAGES += \
+    android.hardware.media.c2@1.2-service-ffmpeg
+
+PRODUCT_VENDOR_PROPERTIES += \
+    persist.ffmpeg_codec2.v4l2.h264=true \
+    persist.ffmpeg_codec2.v4l2.h265=true \
+    persist.ffmpeg_codec2.rank.audio=16 \
+    persist.ffmpeg_codec2.rank.video=256

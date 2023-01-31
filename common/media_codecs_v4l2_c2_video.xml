@@ -10,7 +10,7 @@
            <Limit name="performance-point-1280x720" range="30-30" />
        </MediaCodec>
    </Encoders>
-   <Decoders>
+   <!-- <Decoders>
        <MediaCodec name="c2.v4l2.avc.decoder" type="video/avc" >
            <Limit name="size" min="16x16" max="4096x4096" />
            <Limit name="alignment" value="2x2" />
@@ -32,5 +32,5 @@
            <Feature name="adaptive-playback" />
            <Feature name="secure-playback" required="true" />
        </MediaCodec>
-   </Decoders>
+   </Decoders> -->
 </Included>
