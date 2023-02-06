@@ -38,3 +38,4 @@ SYSFS_MMC0_PATH := emmc2bus/fe340000.mmc
 RPI_CONFIG := $(LOCAL_PATH)/config.txt
 
 $(call inherit-product, device/glodroid/rpi4/device.mk)
+$(call inherit-product, vendor/brcm/rpi4/rpi4-vendor.mk)
