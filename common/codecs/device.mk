@@ -30,7 +30,7 @@ PRODUCT_PACKAGES += \
      android.hardware.media.c2@1.2-service-ffmpeg
 
 PRODUCT_VENDOR_PROPERTIES += \
-     persist.ffmpeg_codec2.v4l2.h264=false \
+     persist.ffmpeg_codec2.v4l2.h264=true \
      persist.ffmpeg_codec2.v4l2.h265=true \
      persist.ffmpeg_codec2.rank.audio=16 \
      persist.ffmpeg_codec2.rank.video=256 \
@@ -38,7 +38,6 @@ PRODUCT_VENDOR_PROPERTIES += \
 # V4L2 codec2
 PRODUCT_PACKAGES += \
     android.hardware.media.c2@1.0-service-v4l2 \
-    libv4l2_codec2_vendor_allocator            \
     libc2plugin_store                          \
 
 PRODUCT_SOONG_NAMESPACES += external/v4l2_codec2
