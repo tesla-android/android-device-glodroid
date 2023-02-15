@@ -36,6 +36,5 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.gralloc.minigbm.backend=gbm_mesa \
 ##
 
-GD_LCD_DENSITY ?= 160
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sf.lcd_density=$(GD_LCD_DENSITY) \
+    ro.sf.lcd_density=180 \
