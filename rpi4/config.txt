@@ -1,5 +1,4 @@
 dtparam=audio=on
-dtparam=krnbt=on
 dtparam=uart1=on
 
 [all]

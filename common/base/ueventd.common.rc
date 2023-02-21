@@ -16,7 +16,6 @@ subsystem usbmisc
 /dev/ttyUSB3                                           0666    system       system
 /dev/block/platform/soc/1c0f000.mmc/by-name/vendor     0600    system       system
 /dev/block/platform/soc/1c0f000.mmc/by-name/userdata   0600    system       system
-/dev/rfkill                                            0660    bluetooth    net_bt
 /dev/ion                                               0664    system       system
 /dev/iio:device0                                       0660    system       system
 /dev/iio:device1                                       0660    system       system
@@ -48,3 +47,8 @@ subsystem usbmisc
 /dev/video18                                           0666   media      media
 /dev/video19                                           0666   media      media
 /dev/video31                                           0666   media      media
+
+# Bluetooth
+/dev/ttyAMA0                                                                 0660   bluetooth  bluetooth
+/dev/rfkill                                                                  0660   bluetooth  bluetooth
+/dev/vcio                                                                    0660   system     bluetooth
